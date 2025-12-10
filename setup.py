@@ -111,7 +111,7 @@ class CustomBDistWheel(bdist_wheel):
 # noinspection PyTypeChecker
 setup(
     cmdclass={
-        "build_py": CustomBuildPy,
+        # "build_py": CustomBuildPy,
         "install": CustomInstall,
         "bdist_wheel": CustomBDistWheel,
     },
