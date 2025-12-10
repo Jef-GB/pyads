@@ -11,8 +11,8 @@ from wheel.bdist_wheel import bdist_wheel
 
 src_folder = Path(__file__).parent.absolute() / "src"
 # ^ This will be on PATH for editable install
-adslib_folder = Path(__file__).parent.absolute() / "adslib"
-adslib_file = src_folder / "adslib.so"
+adslib_folder = Path(__file__).parent.absolute() / "libads"
+adslib_file = src_folder / "libads.so"
 
 
 class CustomBuildPy(build_py):
@@ -35,7 +35,7 @@ class CustomBuildPy(build_py):
     def _compile_library():
         """Use `make` to build adslib - build is done in-place."""
         # Produce `adslib.so`:
-        subprocess.call(["make", "-C", "adslib"])
+        subprocess.call(["make", "-C", "libads"])
 
     @staticmethod
     def _clean_library():
@@ -61,7 +61,7 @@ class CustomBuildPy(build_py):
         if self.compile_adslib():
             # Move .so file from Git submodule into src/ to have it on PATH:
             self.move_file(
-                str(adslib_folder / "adslib.so"),
+                str(adslib_folder / "libads.so"),
                 str(adslib_file),
             )
 
